@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import numpy as np
+from pathlib import Path
 
 
 class TorchModel(nn.Module):
@@ -65,7 +66,8 @@ def main():
     best_acc = 0.0           # 记录历史最高准确率
     patience = 5             # 容忍连续多少轮不提升（早停阈值）
     patience_counter = 0     # 计数器
-    best_model_path = "best_demo.bin"
+    # 无论从哪个目录运行，模型都保存在当前作业的 week02 文件夹中
+    best_model_path = Path(__file__).resolve().parent / "best_demo.bin"
 
 
     for epoch in range(epochs):
@@ -126,5 +128,5 @@ if __name__ == "__main__":
     #     [0.1, 100, 0.3, 0.9, 0.4],  
     #     [0.1, 0.2, 0.3, 0.4, 0.8],  
     # ]
-    # predict("best_demo.bin", test_vec)
+    # predict(Path(__file__).resolve().parent / "best_demo.bin", test_vec)
     
